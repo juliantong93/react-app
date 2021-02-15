@@ -126,7 +126,7 @@ const MovieListing = props => {
             return (
               <Link className="movie" to={ `/movie/${movie.id}` } key={index}>
                 <div className="popularity">{ popularity.toFixed(1) }</div>
-                <img className="poster" src={ getImgUrl(500, poster_path) } alt={ movie.title } />
+                <img className="poster" src={ getImgUrl(poster_path) } alt={ movie.title } />
                 <h5 className="movie-title">{ title }</h5>
               </Link>
             )

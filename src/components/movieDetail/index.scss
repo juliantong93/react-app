@@ -1,0 +1,34 @@
+.movie-detail-wrapper {
+  background-color: #222b31;
+  min-height: 100vh;
+
+  .movie-backdrop {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .movie-detail {
+    padding: 15px;
+  }
+
+  .movie-title {
+
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .genre {
+    font-size: 12px;
+    line-height: 16px;
+    display: inline-block;
+    padding: 5px;
+    background-color: #ffb10a;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+}
