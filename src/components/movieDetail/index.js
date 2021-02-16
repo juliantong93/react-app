@@ -14,11 +14,11 @@ const MovieDetail = (props) => {
   const [duration, setDuration] = useState('')
 
   useEffect(() => {
+    // gets movie id from the url param
     getMovieDetail({
       movieId: props.match.params.movieId,
     }).then((res) => {
       const { data } = res
-      console.log(data)
       setBackdropSrc(getImgUrl(data.backdrop_path))
       setMovieTitle(data.title)
       setOverview(data.overview)

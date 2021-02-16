@@ -13,28 +13,34 @@ const MovieListing = props => {
   const [sortField, setSortField] = useState('release_date')
   const [hasMore, setHasMore] = useState(true)
 
-  const fetchMore = () => {
+  /***
+   * This fetches the movies based on the provided parameters.
+   */
+  const fetchMore = async () => {
     if (movies.length >= totalRecords) {
       setHasMore(false)
       return
     }
 
-    console.log('page: ', currentPage)
-    getMovieListing({
+    const res = await getMovieListing({
       sortField: sortField,
       sortBy: sorting,
       page: currentPage,
-    }).then((res) => {
-      setMovies([ ...movies, ...res.data.results ])
-      setTotalRecords(res.data.total_results)
     })
+    setMovies([ ...movies, ...res.data.results ])
+    setTotalRecords(res.data.total_results)
   }
 
   useEffect(() => {
     fetchMore()
   }, [sorting, sortField, currentPage])
 
+  /***
+   * Updates the sorting for movie list.
+   * @param e
+   */
   const updSortBy = (e) => {
+    console.log('updSortBy')
     const value = e.target.value
     let str = ''
     switch (value) {
@@ -55,6 +61,9 @@ const MovieListing = props => {
     setPage(1)
   }
 
+  /***
+   * Updates movie sorting by ascending or descending
+   */
   const updSorting = (e) => {
     const value = e.target.value
     let str = ''
@@ -73,10 +82,18 @@ const MovieListing = props => {
     setPage(1)
   }
 
+  /***
+   * Triggers when user scrolls to end of list.
+   * This loads the next page of movies.
+   */
   const getNextPage = () => {
     setPage(currentPage + 1)
   }
 
+  /***
+   * Refresh function used when "pull to refresh".
+   * This refreshes the page and force it to load from page 1
+   */
   const refresh = () => {
     setMovies([])
     currentPage === 1 ? fetchMore() : setPage(1)

@@ -1,3 +1,7 @@
+/***
+ * Used to get full language name based on language code
+ */
+
 export default {
   "af":    "Afrikaans",
   "sq":    "Albanian",
