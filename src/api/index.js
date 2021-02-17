@@ -10,8 +10,6 @@ export const getMovieListing = function(params) {
       'sort_by': `${params.sortField}.${params.sortBy}`,
       'page': params.page,
     }
-  }).catch(err => {
-    console.log(`Error retrieving movie listing: ${url}`, err)
   })
 }
 
@@ -21,7 +19,5 @@ export const getMovieDetail = function(params) {
     params: {
       'api_key': apiKey,
     },
-  }).catch(err => {
-    console.log(`Error retrieving movie details: ${url}`, err)
   })
 }

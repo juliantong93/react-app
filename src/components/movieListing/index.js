@@ -22,13 +22,17 @@ const MovieListing = props => {
       return
     }
 
-    const res = await getMovieListing({
-      sortField: sortField,
-      sortBy: sorting,
-      page: currentPage,
-    })
-    setMovies([ ...movies, ...res.data.results ])
-    setTotalRecords(res.data.total_results)
+    try {
+      const res = await getMovieListing({
+        sortField: sortField,
+        sortBy: sorting,
+        page: currentPage,
+      })
+      setMovies([ ...movies, ...res.data.results ])
+      setTotalRecords(res.data.total_results)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   useEffect(() => {
@@ -106,14 +110,14 @@ const MovieListing = props => {
       </div>
       <div className="toolbox">
         <label htmlFor="sort_field">Sort </label>
-        <select id="sort_field" defaultValue="0" onChange={updSortBy}>
-          <option value="0">Release Date</option>
-          <option value="1">Movie Title</option>
-          <option value="2">Rating</option>
+        <select id="sort_field" defaultValue="0" onChange={updSortBy} data-testid="sort_field_dropdown">
+          <option value="0" data-testid="sort_field_opt">Release Date</option>
+          <option value="1" data-testid="sort_field_opt">Movie Title</option>
+          <option value="2" data-testid="sort_field_opt">Rating</option>
         </select>
-        <select id="sorting_dropdown" defaultValue="0" onChange={updSorting}>
-          <option value="0">Descending</option>
-          <option value="1">Ascending</option>
+        <select id="sorting_dropdown" defaultValue="0" onChange={updSorting} data-testid="sort_order_dropdown">
+          <option value="0" data-testid="sort_order_opt">Descending</option>
+          <option value="1" data-testid="sort_order_opt">Ascending</option>
         </select>
       </div>
       <InfiniteScroll
@@ -141,7 +145,7 @@ const MovieListing = props => {
           movies.map((movie, index) => {
             const { title, popularity, poster_path } = movie
             return (
-              <Link className="movie" to={ `/movie/${movie.id}` } key={index}>
+              <Link className="movie" to={ `/movie/${movie.id}` } key={index} role="movie">
                 <div className="popularity">{ popularity.toFixed(1) }</div>
                 <img className="poster" src={ getImgUrl(poster_path) } alt={ movie.title } />
                 <h5 className="movie-title">{ title }</h5>
