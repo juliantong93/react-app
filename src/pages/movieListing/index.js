@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 const MovieListing = props => {
+  let mounted = true
   const [movies, setMovies] = useState([])
   const [currentPage, setPage] = useState(1)
   const [totalRecords, setTotalRecords] = useState(1)
@@ -28,8 +29,10 @@ const MovieListing = props => {
         sortBy: sorting,
         page: currentPage,
       })
-      setMovies([ ...movies, ...res.data.results ])
-      setTotalRecords(res.data.total_results)
+      if (mounted) {
+        setMovies([ ...movies, ...res.data.results ])
+        setTotalRecords(res.data.total_results)
+      }
     } catch (e) {
       console.log(e)
     }
@@ -37,6 +40,9 @@ const MovieListing = props => {
 
   useEffect(() => {
     fetchMore()
+    return () => {
+      mounted = false
+    }
   }, [sorting, sortField, currentPage])
 
   /***
@@ -44,7 +50,6 @@ const MovieListing = props => {
    * @param e
    */
   const updSortBy = (e) => {
-    console.log('updSortBy')
     const value = e.target.value
     let str = ''
     switch (value) {

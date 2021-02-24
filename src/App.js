@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import './App.scss'
-import MovieListing from "./components/movieListing"
-import MovieDetail from "./components/movieDetail"
+import MovieListing from "./pages/movieListing"
+import MovieDetail from "./pages/movieDetail"
 import {
   BrowserRouter as Router,
   Switch,
