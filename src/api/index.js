@@ -1,7 +1,7 @@
 import axios from "axios"
 import { apiBaseUrl, apiKey } from "../config/baseUrl";
 
-export const getMovieListing = function(params) {
+export let getMovieListing = function(params) {
   let url = `${apiBaseUrl}/3/discover/movie`
   return axios.get(url, {
     params: {
@@ -13,7 +13,7 @@ export const getMovieListing = function(params) {
   })
 }
 
-export const getMovieDetail = function(params) {
+export let getMovieDetail = function(params) {
   let url = `${apiBaseUrl}/3/movie/${params.movieId}`
   return axios.get(url, {
     params: {

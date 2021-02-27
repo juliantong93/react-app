@@ -26,11 +26,11 @@ const MovieDetail = (props) => {
       setGenres(data.genres)
       setDuration(data.runtime)
     })
-  }, [])
+  }, [props.match.params.movieId])
 
   return (
     <div className="movie-detail-wrapper">
-      <img className="movie-backdrop" src={backdropSrc} />
+      <img className="movie-backdrop" src={backdropSrc} alt={ movieTitle } />
       <div className="movie-detail">
         <h1 className="movie-title">{ movieTitle }</h1>
         <div>

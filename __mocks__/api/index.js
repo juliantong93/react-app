@@ -18,3 +18,7 @@ export default jest.fn(() => Promise.resolve({
     },
   ],
 }))
+
+export function getMovieListing() {
+
+}
